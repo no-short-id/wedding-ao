@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ольга & Антон — 08.08.2026</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Cormorant Garamond',sans-serif;
+    /* Благородный светло-серый аристократичный фон */
+    background: #f4f5f7;
+    color: #3a3f47;
+    overflow-x:hidden;
+}
+
+/* Элегантное золотистое мерцание */
+.petals{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:1;
+}
+
+.petal{
+    position:absolute;
+    top:-50px;
+    opacity:.5;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    0%{
+        transform:translateY(-50px) translateX(0) rotate(0deg);
+    }
+    100%{
+        transform:translateY(110vh) translateX(80px) rotate(360deg);
+    }
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:60px 20px;
+    position:relative;
+    z-index:2;
+
+    /* Мягкий свет со слоновыми и платиновыми переливами */
+    background:
+    radial-gradient(circle at center, rgba(245, 236, 216, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at top left, #ebedf0 0%, transparent 70%);
+}
+
+/* Стили для блока фотографий */
+.photo-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 40px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.photo-container img {
+    width: calc(50% - 12px);
+    max-width: 340px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 16px; /* Округлые края для фото */
+    box-shadow: 0 15px 35px rgba(50, 55, 63, 0.1);
+    border: 1px solid rgba(184, 147, 78, 0.25); /* Нежная золотистая рамка */
+}
+
+.names{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(3rem,8vw,5.5rem);
+    color: #b8934e; /* Благородное матовое золото */
+    margin-bottom:15px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.subtitle{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.4rem,2.5vw,1.75rem);
+    color: #656c75;
+    margin-bottom:40px;
+    font-style: italic;
+}
+
+.date{
+    background: white;
+    padding:14px 40px;
+    border-radius: 30px; /* Округлые края плашки */
+    border: 1px solid rgba(184, 147, 78, 0.4);
+    box-shadow: 0 8px 20px rgba(0,0,0,.04);
+    font-weight:600;
+    margin-bottom:20px;
+    letter-spacing: 1px;
+    color: #b8934e;
+    display: inline-block;
+}
+
+/* Стиль для таблетки времени */
+.time-badge {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px 30px;
+    border-radius: 30px; /* Округлые края плашки */
+    border: 1px solid rgba(101, 108, 117, 0.2);
+    font-weight: 400;
+    margin-bottom: 45px;
+    color: #656c75;
+    letter-spacing: 1px;
+}
+
+.invitation{
+    max-width:700px;
+    line-height:2.0;
+    font-size:1.65rem;
+    color: #3a3f47;
+    font-weight: 400;
+}
+
+.section{
+    padding:110px 20px;
+    position:relative;
+    z-index:2;
+}
+
+/* 1. Раздел таймера с адаптивным фото-фоном */
+.section-countdown {
+    padding: 130px 20px;
+    position: relative;
+    z-index: 2;
+    background-image: url('photo_12_2026-06-11_11-56-19.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.section-countdown::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 30, 38, 0.75);
+    z-index: 1;
+}
+
+.section-countdown .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* 2. Раздел деталей праздника с адаптивным фото-фоном */
+.section-details {
+    padding: 130px 20px;
+    position: relative;
+    z-index: 2;
+    background-image: url('photo_5_2026-06-11_11-56-37.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.section-details::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 30, 38, 0.75);
+    z-index: 1;
+}
+
+.section-details .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Полупрозрачные карточки для раздела "Детали праздника" */
+.section-details .card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(229, 193, 126, 0.25);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.section-details .card:hover {
+    border-color: rgba(229, 193, 126, 0.5);
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.section-details .card h3 {
+    color: #e5c17e;
+}
+
+.section-details .section-card-text {
+    color: #f4f5f7;
+}
+
+/* 3. Раздел Дресс-кода и Подарков с адаптивным фото-фоном */
+.section-about {
+    padding: 130px 20px;
+    position: relative;
+    z-index: 2;
+    background-image: url('photo_9_2026-06-18_23-06-59.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.section-about::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 30, 38, 0);
+    z-index: 1;
+}
+
+.section-about .container {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 100px;
+}
+
+.section-about .container:last-child {
+    margin-bottom: 0;
+}
+
+/* Классические непрозрачные белые карточки для этого раздела */
+.section-about .card {
+    background: #ffffff;
+    border: 1px solid rgba(184, 147, 78, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.section-about .card:hover {
+    border-color: rgba(184, 147, 78, 0.4);
+    box-shadow: 0 15px 35px rgba(184, 147, 78, 0.2);
+}
+
+.section-about .card h3 {
+    color: #4f5661;
+}
+
+.section-about .section-card-text {
+    color: #555b66;
+}
+
+/* 4. Раздел программы дня с адаптивным фото-фоном */
+.section-program {
+    padding: 130px 20px;
+    position: relative;
+    z-index: 2;
+    background-image: url('photo_11_2026-06-18_22-35-20.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.section-program::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 30, 38, 0.75);
+    z-index: 1;
+}
+
+.section-program .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Полупрозрачный таймлайн для раздела "Программа дня" */
+.section-program .timeline-item {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(229, 193, 126, 0.2);
+    border-left: 4px solid #e5c17e;
+    color: #f4f5f7;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.section-program .time {
+    color: #e5c17e;
+}
+
+/* Светлые золотые заголовки для разделов с фото-фонами */
+.section-countdown .section-title,
+.section-details .section-title,
+.section-about .section-title,
+.section-program .section-title {
+    color: #e5c17e; 
+    text-shadow: 0 2px 10px rgba(0,0,0,0);
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-size:2.8rem;
+    color: #b8934e;
+    margin-bottom:70px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.cards{
+    display:flex;
+    justify-content:center;
+    gap:35px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background: white;
+    border-radius: 16px; /* Округлые края карточек */
+    padding:45px 40px;
+    text-align:center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    border: 1px solid rgba(184, 147, 78, 0.15);
+    transition: .4s ease;
+}
+
+.card:hover{
+    transform: translateY(-3px);
+    border-color: rgba(184, 147, 78, 0.4);
+    box-shadow: 0 15px 35px rgba(184, 147, 78, 0.1);
+}
+
+.card h3{
+    margin-bottom:20px;
+    color: #4f5661;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 1.8rem;
+}
+
+/* Стили для текста в блоках дресс-кода и подарков */
+.section-card-text {
+    max-width: 600px;
+    margin: auto;
+    line-height: 1.9;
+    color: #555b66;
+}
+
+.timeline{
+    max-width:650px;
+    margin:auto;
+}
+
+.timeline-item{
+    background: white;
+    padding:25px 35px;
+    margin-bottom:25px;
+    border-radius: 14px; /* Округлые края элементов таймлайна */
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-left: 3px solid #b8934e;
+    box-shadow: 0 5px 15px rgba(0,0,0,.01);
+}
+
+.time{
+    font-weight:600;
+    color: #b8934e;
+    margin-bottom:8px;
+    font-size: 1.65rem;
+    letter-spacing: 1px;
+}
+
+.countdown{
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+/* Адаптированные полупрозрачные карточки таймера для фото-фона */
+.count-item{
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    width:140px;
+    padding:30px 15px;
+    border-radius: 14px;
+    border: 1px solid rgba(229, 193, 126, 0.3);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.count-number{
+    font-size:2.4rem;
+    font-weight:600;
+    color: #e5c17e;
+}
+
+.count-label{
+    margin-top:10px;
+    color: #e4e7eb;
+    font-size: 1.35rem;
+}
+
+.rsvp-form{
+    max-width:600px;
+    margin:auto;
+    background: white;
+    padding:55px 45px;
+    border-radius: 20px; /* Округлые края формы */
+    border: 1px solid rgba(184, 147, 78, 0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+}
+
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea{
+    width:100%;
+    padding:16px;
+    margin-bottom:25px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 10px; /* Округлые края полей ввода */
+    font-size:19px;
+    font-family:inherit;
+    background-color: #fbfbfc;
+    color: #3a3f47;
+}
+
+.rsvp-form option{
+    font-family:'Cormorant Garamond', serif;
+    background-color: white;
+    color: #3a3f47;
+}
+
+.rsvp-form input:focus,
+.rsvp-form select:focus,
+.rsvp-form textarea:focus{
+    outline:none;
+    border-color: #b8934e;
+    background-color: #fff;
+}
+
+.rsvp-form button{
+    width:100%;
+    padding:18px;
+    border: none;
+    border-radius: 30px; /* Изящная закругленная кнопка */
+    background: #b8934e;
+    color: white;
+    font-size:20px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    font-family:'Cormorant Garamond', serif;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(184, 147, 78, 0.2);
+}
+
+.rsvp-form button:hover{
+    background: #a38040;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(184, 147, 78, 0.3);
+}
+
+#successMessage{
+    display:none;
+    margin-top:25px;
+    text-align:center;
+    color: #b8934e;
+    font-weight:600;
+}
+
+.footer{
+    text-align:center;
+    padding:110px 20px;
+    background: #ebedf0;
+    position:relative;
+    z-index:2;
+    border-top: 1px solid rgba(184, 147, 78, 0.15);
+}
+
+.footer h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:4.2rem;
+    color: #b8934e;
+    margin-bottom:20px;
+    font-weight: 500;
+}
+
+.footer p {
+    color: #555b66;
+}
+
+.hearts{
+    font-size:2rem;
+    margin-top:25px;
+    color: #b8934e;
+    letter-spacing: 6px;
+}
+
+@media(max-width:600px){
+    .photo-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .photo-container img {
+        width: 100%;
+        max-width: 280px;
+    }
+    .rsvp-form{
+        padding:40px 25px;
+    }
+
+    .count-item{
+        width:105px;
+    }
+    
+    /* Оптимизация отступов на мобильных для фото-разделов */
+    .section-countdown,
+    .section-details,
+    .section-about,
+    .section-program {
+        padding: 90px 15px; 
+    }
+
+    .section-about .container {
+        margin-bottom: 70px;
+    }
+}
+
+.card,
+.timeline-item,
+.count-item,
+.date,
+.time-badge{
+    font-size:1.55rem;
+}
+
+.venue-link{
+    color: #e5c17e; /* Золотой цвет ссылки для темного фото-фона */
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+    border-bottom: 1px dashed #e5c17e;
+}
+
+.venue-link:hover{
+    color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="petals"></div>
+
+<section class="hero">
+
+    <!-- Блок с фотографиями -->
+    <div class="photo-container">
+        <img src="photo_1_2026-06-18_21-21-42.jpg" alt="Ольга и Антон Фото 1">
+        <img src="photo_2_2026-06-18_21-21-42.jpg" alt="Ольга и Антон Фото 2">
+    </div>
+
+    <div class="names">Ольга & Антон</div>
+
+    <div class="subtitle">
+        Приглашаем вас разделить с нами самый счастливый день нашей жизни
+    </div>
+
+    <div class="date">
+        08 августа 2026 года
+    </div>
+
+    <!-- Таблетка с временем встречи -->
+    <div class="time-badge">
+        Время сбора гостей: 15:00
+    </div>
+
+    <div class="invitation">
+        Дорогие родные! <br><br>
+        Мы будем счастливы видеть вас рядом в день,
+        когда наши сердца официально станут одной семьёй.
+        Приглашаем вас разделить с нами радость,
+        тёплые эмоции, улыбки и незабываемые моменты этого праздника.
+    </div>
+
+</section>
+
+<!-- Раздел таймера с фото-фоном -->
+<section class="section-countdown">
+
+    <div class="container">
+
+        <h2 class="section-title">До свадьбы осталось</h2>
+
+        <div class="countdown">
+
+            <div class="count-item">
+                <div class="count-number" id="days">0</div>
+                <div class="count-label">Дней</div>
+            </div>
+
+            <div class="count-item">
+                <div class="count-number" id="hours">0</div>
+                <div class="count-label">Часов</div>
+            </div>
+
+            <div class="count-item">
+                <div class="count-number" id="minutes">0</div>
+                <div class="count-label">Минут</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Раздел деталей праздника с полупрозрачными карточками -->
+<section class="section-details">
+
+    <div class="container">
+
+        <h2 class="section-title">Детали праздника</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>📅 Дата</h3>
+                <p class="section-card-text">08.08.2026</p>
+            </div>
+
+            <div class="card">
+            <h3>💒 Место встречи</h3>
+            <p class="section-card-text">
+                <a href="https://yandex.ru/maps/org/dom_lipy/133568600642/?ll=37.634901%2C55.782987&z=14"
+                target="_blank"
+                class="venue-link">
+                Дом Липы
+                </a>
+            </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Фото-раздел для Дресс-кода и Подарков (карточки внутри белые и непрозрачные) -->
+<section class="section-about">
+
+    <!-- Блок Дресс-код -->
+    <div class="container">
+
+        <h2 class="section-title">Дресс-код</h2>
+
+        <div class="cards">
+            <div class="card" style="max-width: 700px; width: 100%;">
+                <h3>🎨 Пожелания к стилю</h3>
+                <p class="section-card-text">
+                    Мы будем рады видеть вас в образах классического вечернего стиля. Для мужчин подойдут смокинги, классические костюмы тёмных оттенков, белые рубашки и бабочки или галстуки. Для дам — элегантные вечерние и коктейльные платья, костюмы и утончённые аксессуары.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Блок Пожелания по подаркам -->
+    <div class="container">
+
+        <h2 class="section-title">Пожелания по подаркам</h2>
+
+        <div class="cards">
+            <div class="card" style="max-width: 700px; width: 100%;">
+                <h3>🎁 Внимание и забота</h3>
+                <p class="section-card-text">
+                    Разделить с вами этот день для нас уже подарок, но также будем рады денежным подаркам!
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Раздел программы дня с полупрозрачным таймлайном -->
+<section class="section-program">
+
+    <div class="container">
+
+        <h2 class="section-title">Программа дня</h2>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="time">15:00</div>
+                Сбор гостей
+            </div>
+
+            <div class="timeline-item">
+                <div class="time">16:00 - 18:00</div>
+                Поздравления и фотосессия
+            </div>
+
+            <div class="timeline-item">
+                <div class="time">18:00</div>
+                Праздничный ужин
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section">
+
+    <div class="container">
+
+        <h2 class="section-title">Подтвердите присутствие</h2>
+
+        <form class="rsvp-form" id="rsvpForm">
+
+            <input id="guestName" type="text" placeholder="Имя и фамилия" required>
+
+            <select id="attendance" required>
+                <option value="">Выберите вариант</option>
+                <option>С удовольствием приду ✨</option>
+                <option>К сожалению, не смогу</option>
+            </select>
+
+            <input id="guestCount" type="number"
+                   min="1"
+                   max="10"
+                   placeholder="Количество гостей">
+
+            <textarea id="comment" rows="4"
+                      placeholder="Пожелания или комментарий"></textarea>
+
+            <button type="submit">
+                Отправить ответ
+            </button>
+
+            <div id="successMessage">
+                Спасибо! Ваш ответ получен ✨
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+    <h2>Ждём вас!</h2>
+
+    <p>
+        Будем рады разделить этот день вместе с вами.
+    </p>
+
+    <div class="hearts">
+        ✨ • 🥂 • ✨
+    </div>
+
+    <p style="margin-top:30px; color: #b8934e; letter-spacing: 1px; font-weight: 500;">
+        С любовью,<br>
+        Ольга и Антон
+    </p>
+
+</footer>
+
+<script>
+
+/* Элегантное мерцание золотых искорок */
+
+const TOKEN = "8082755552:AAG7CvaHRqzFLOn0FGlvZmv5ESOOaV4QORU";
+const CHAT_ID = "66443819";
+
+const petalsContainer = document.querySelector('.petals');
+
+const stars = ['✨', '·'];
+
+for(let i=0; i<18; i++){
+
+    const petal = document.createElement('div');
+
+    petal.classList.add('petal');
+
+    petal.innerHTML =
+        stars[Math.floor(Math.random()*stars.length)];
+
+    petal.style.left =
+        Math.random()*100 + '%';
+
+    petal.style.fontSize =
+        (12 + Math.random()*10) + 'px';
+
+    petal.style.animationDuration =
+        (12 + Math.random()*15) + 's';
+
+    petal.style.animationDelay =
+        Math.random()*8 + 's';
+
+    petalsContainer.appendChild(petal);
+}
+
+/* Таймер */
+
+const weddingDate =
+new Date("2026-08-08T15:00:00");
+
+function updateCountdown(){
+
+    const now = new Date();
+
+    const diff =
+    weddingDate - now;
+
+    if(diff <= 0) return;
+
+    const days =
+    Math.floor(diff/(1000*60*60*24));
+
+    const hours =
+    Math.floor((diff/(1000*60*60))%24);
+
+    const minutes =
+    Math.floor((diff/(1000*60))%60);
+
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = hours;
+    document.getElementById('minutes').textContent = minutes;
+}
+
+updateCountdown();
+setInterval(updateCountdown,60000);
+
+
+
+document
+.getElementById('rsvpForm')
+.addEventListener('submit', async function(e){
+
+    e.preventDefault();
+
+    const data = {
+        name: document.getElementById("guestName").value,
+        attendance: document.getElementById("attendance").value,
+        guests: document.getElementById("guestCount").value,
+        comment: document.getElementById("comment").value
+    };
+
+    try {
+
+        await fetch(
+                    "https://script.google.com/macros/s/AKfycbyTtWBvhXOYXJV_tVgqrmgL_56DjhpkWDxLUoEvfUr7z-2rnsrCAJBvF_Q5XFevpAIpaQ/exec",
+        {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(data)
+        }
+                    );
+        
+        document
+            .getElementById("successMessage")
+            .style.display = "block";
+
+        this.reset();
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert("Не удалось отправить ответ");
+
+    }
+
+});
+
+
+</script>
+
+</body>
+</html>
